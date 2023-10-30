@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="utf-8">
+    <title>Inicio</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Estilos personalizados */
+        body {
+            background-color: #f7f7f7;
+            font-family: Arial, sans-serif;
+        }
+        .navbar {
+            background-color: #333;
+            color: #fff;
+        }
+        .navbar-brand {
+            font-size: 24px;
+        }
+        .nav-item {
+            margin-right: 10px;
+        }
+        .table {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .table-dark th {
+            background-color: #333;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#" th:href="@{/}">Registro y inicio de sesión</a>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li sec:authorize="isAuthenticated()" class="nav-item">
+                    <a class="nav-link" th:href="@{/logout}">Cerrar sesión</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <h1 class="text-center">Bienvenido</h1>
+    <br>
+    <h4>
+        Esta es la tabla de usuarios registrados, <span sec:authentication="principal.username"></span>
+    </h4>
+
+    <br> <br>
+
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="usuario : ${usuarios}">
+                <td th:text="${usuario.id}">ID</td>
+                <td th:text="${usuario.nombre}">Nombre</td>
+                <td th:text="${usuario.apellido}">Apellido</td>
+                <td th:text="${usuario.email}">Email</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
